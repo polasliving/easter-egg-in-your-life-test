@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>4848 復活節彩蛋｜四月金錢測驗</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:     #FBF7F0;
+  --parchment: #F5EAD8;
+  --linen:     #EAD9C2;
+  --blush-pale:#F5E6DE;
+  --blush:     #E8C8BC;
+  --rose-gold: #D4967A;
+  --gold-line: #C9A86C;
+  --gold:      #D4A855;
+  --gold-deep: #B88A3A;
+  --peach:     #E8A882;
+  --text-dark: #3A2A1A;
+  --text-mid:  #6A4E38;
+  --text-soft: #9A7A62;
+  --text-muted:#C0A08A;
+  --border:    #E0CEB4;
+  --card:      rgba(255,252,246,0.82);
+  --white:     #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;width:100%;overflow:hidden;font-family:'Noto Sans TC',sans-serif;background:var(--ivory);color:var(--text-dark)}
+
+/* ── SCREENS ── */
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .55s ease;overflow:hidden;background:var(--ivory)}
+.screen.active{opacity:1;pointer-events:all}
+.scroll-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;align-items:center}
+
+/* ── BG ── */
+.amb{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 65% 45% at 5% 0%,rgba(232,200,188,.32) 0%,transparent 60%),
+             radial-gradient(ellipse 55% 40% at 97% 5%,rgba(212,168,85,.18) 0%,transparent 58%),
+             radial-gradient(ellipse 45% 35% at 3% 98%,rgba(200,218,190,.18) 0%,transparent 55%),
+             radial-gradient(ellipse 60% 45% at 97% 96%,rgba(232,200,188,.20) 0%,transparent 58%)}
+
+/* ── TOP BAR ── */
+.top-bar{flex-shrink:0;position:relative;z-index:10;text-align:center;padding:16px 20px 8px}
+.top-bar-txt{font-size:10.5px;letter-spacing:.22em;color:var(--text-muted);display:inline-flex;align-items:center;gap:7px}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.7}
+
+/* ════════════ HERO ════════════ */
+#s-hero .scroll-body{position:relative;z-index:5;padding:0 24px 44px;align-items:center}
+.hero-banner{width:calc(100% + 48px);margin:0 -24px;height:108px;flex-shrink:0;position:relative;overflow:hidden}
+.hero-egg-wrap{position:relative;width:152px;height:180px;margin:10px auto 16px;flex-shrink:0}
+.hero-glow{position:absolute;inset:-22px;background:radial-gradient(ellipse,rgba(212,168,85,.26) 0%,transparent 68%);border-radius:50%;animation:glowP 3.2s ease-in-out infinite}
+@keyframes glowP{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.hero-egg-svg{width:100%;height:100%;animation:eggF 4s ease-in-out infinite;filter:drop-shadow(0 10px 22px rgba(176,120,50,.24))}
+@keyframes eggF{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-9px) rotate(.8deg)}}
+
+.hero-orn{text-align:center;font-size:13px;color:var(--gold-deep);letter-spacing:.3em;margin-bottom:10px}
+.hero-kicker{text-align:center;font-size:11px;letter-spacing:.22em;color:var(--text-soft);margin-bottom:12px}
+.hero-title{font-family:'Noto Serif TC',serif;font-size:clamp(22px,6vw,30px);font-weight:700;color:var(--text-dark);text-align:center;line-height:1.45;margin-bottom:14px;letter-spacing:.04em}
+.hero-desc{font-size:14px;line-height:1.9;color:var(--text-mid);text-align:center;max-width:300px;margin:0 auto 14px}
+.div-row{display:flex;align-items:center;gap:10px;width:200px;margin:0 auto 18px}
+.div-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--linen),transparent)}
+.orn{color:var(--gold-deep);letter-spacing:.25em;font-size:12px}
+.stats{display:flex;gap:20px;justify-content:center;margin-bottom:24px}
+.stat{text-align:center}
+.stat-n{font-family:'Noto Serif TC',serif;font-size:19px;font-weight:600;color:var(--gold-deep);display:block}
+.stat-l{font-size:10px;color:var(--text-muted);letter-spacing:.1em;display:block;margin-top:2px}
+.stat-sep{width:1px;height:32px;background:var(--border);align-self:center}
+
+/* START button */
+.btn-start{display:flex;align-items:center;justify-content:center;width:100%;max-width:290px;margin:0 auto 12px;padding:17px 28px;
+  background:linear-gradient(135deg,#F0C870 0%,#D4A855 45%,#B88A3A 100%);
+  color:#3A2008;font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;
+  letter-spacing:.14em;border:none;border-radius:50px;cursor:pointer;
+  text-align:center;
+  box-shadow:0 6px 24px rgba(196,144,50,.34),inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .2s,box-shadow .2s;-webkit-appearance:none;position:relative;overflow:hidden}
+.btn-start::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+  transform:translateX(-100%);animation:shimmer 3.5s ease-in-out infinite 2s}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.btn-start:active{transform:scale(.97);box-shadow:0 3px 12px rgba(196,144,50,.3)}
+.hero-note{text-align:center;font-size:11px;color:var(--text-muted);letter-spacing:.08em}
+
+/* ════════════ QUIZ ════════════ */
+#s-quiz .scroll-body{position:relative;z-index:5;padding:14px 18px 40px;align-items:center}
+.pips-wrap{width:100%;max-width:380px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.pips-label{font-size:11px;color:var(--text-muted);letter-spacing:.18em}
+.pips{display:flex;gap:5px}
+.pip{width:20px;height:3px;border-radius:2px;background:var(--linen);transition:background .3s,width .3s}
+.pip.done{background:var(--gold);width:24px}
+.pip.cur{background:var(--gold-line);width:28px}
+
+/* question card */
+.q-card{width:100%;max-width:380px;background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(224,206,180,.65);border-radius:22px;padding:26px 20px 22px;
+  box-shadow:0 4px 26px rgba(140,104,72,.10),0 1px 4px rgba(140,104,72,.06)}
+
+/* Q number — centred */
+.q-num{font-size:10.5px;letter-spacing:.22em;color:var(--gold-deep);text-align:center;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px}
+.q-num::before,.q-num::after{content:'✦';font-size:9px}
+
+/* Q text — centred, larger, darker */
+.q-text{font-family:'Noto Serif TC',serif;font-size:clamp(16px,4.5vw,19px);font-weight:600;color:var(--text-dark);text-align:center;line-height:1.7;margin-bottom:22px;letter-spacing:.02em}
+
+/* options */
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1.5px solid var(--border);border-radius:14px;background:rgba(255,252,246,.55);cursor:pointer;transition:border-color .22s,background .22s,transform .15s;text-align:left;width:100%;-webkit-appearance:none}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--gold);background:rgba(240,200,112,.12)}
+.opt-ltr{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--parchment);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--text-mid);font-family:'Noto Serif TC',serif;transition:background .22s,color .22s}
+.opt.sel .opt-ltr{background:var(--gold);color:#3A2008}
+.opt-txt{font-size:14px;line-height:1.75;color:var(--text-dark);padding-top:5px}
+
+/* nav */
+.q-nav{display:flex;gap:10px;width:100%;max-width:380px;margin-top:18px}
+.btn-back{padding:15px 20px;border:1.5px solid var(--border);border-radius:40px;background:transparent;
+  font-size:14px;color:var(--text-soft);cursor:pointer;font-family:'Noto Sans TC',sans-serif;
+  text-align:center;transition:background .18s;-webkit-appearance:none;white-space:nowrap}
+.btn-back:active{background:var(--parchment)}
+.btn-next{flex:1;padding:15px;border:none;border-radius:40px;
+  background:linear-gradient(135deg,#F0C870,#D4A855);color:#3A2008;
+  font-size:15px;font-weight:600;font-family:'Noto Serif TC',serif;letter-spacing:.1em;
+  cursor:pointer;text-align:center;transition:opacity .2s,transform .15s;-webkit-appearance:none;
+  box-shadow:0 4px 14px rgba(196,144,50,.28)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.btn-next:not(:disabled):active{transform:scale(.97)}
+
+/* ════════════ LOADING ════════════ */
+#s-loading{justify-content:center;align-items:center}
+#s-loading .scroll-body{justify-content:center;align-items:center;gap:26px;padding:40px}
+.load-eggs{display:flex;gap:16px;align-items:flex-end}
+.load-egg{animation:lBounce 1.35s ease-in-out infinite}
+.load-egg:nth-child(2){animation-delay:.18s}
+.load-egg:nth-child(3){animation-delay:.36s}
+@keyframes lBounce{0%,100%{transform:translateY(0);opacity:.6}50%{transform:translateY(-13px);opacity:1}}
+.load-txt{font-family:'Noto Serif TC',serif;font-size:15px;color:var(--text-mid);letter-spacing:.15em;text-align:center}
+.load-sub{font-size:12px;color:var(--text-muted);letter-spacing:.1em;text-align:center}
+
+/* ════════════ RESULT ════════════ */
+#s-result .scroll-body{position:relative;z-index:5;padding:0 0 48px;align-items:stretch}
+.r-hero{position:relative;overflow:hidden;padding:26px 24px 22px;text-align:center;flex-shrink:0}
+.r-hero-bg{position:absolute;inset:0;z-index:0}
+.r-hero-in{position:relative;z-index:2}
+.r-badge{display:inline-block;padding:5px 16px;border-radius:20px;font-size:10px;letter-spacing:.2em;margin-bottom:12px;font-family:'Noto Sans TC',sans-serif}
+.r-egg{width:120px;height:142px;margin:0 auto 14px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.13))}
+.r-orn{font-size:11px;letter-spacing:.28em;color:var(--gold-deep);margin-bottom:6px}
+.r-type{font-family:'Noto Serif TC',serif;font-size:clamp(20px,5.5vw,26px);font-weight:700;color:var(--text-dark);margin-bottom:4px}
+.r-tagline{font-size:12px;color:var(--text-soft);letter-spacing:.12em}
+
+.cstrip{display:flex;height:5px;margin:0 18px 20px;border-radius:3px;overflow:hidden;flex-shrink:0}
+
+.r-body{padding:0 18px}
+.r-desc{font-size:14.5px;line-height:1.95;color:var(--text-dark);margin-bottom:20px;padding:18px;background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:18px;border:1px solid rgba(224,206,180,.55);text-align:center}
+
+.sec-lbl{display:flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.2em;color:var(--gold-deep);margin-bottom:10px;font-weight:500;justify-content:center}
+.sec-lbl::before,.sec-lbl::after{content:'';display:block;height:1px;width:28px;background:var(--gold-line);opacity:.6}
+
+.talisman-card{background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(224,206,180,.5);border-radius:16px;padding:16px 18px;margin-bottom:16px;text-align:center}
+.talisman-name{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--text-dark);margin-bottom:8px}
+.talisman-why{font-size:13px;line-height:1.8;color:var(--text-mid)}
+
+.upgrade-card{background:rgba(255,250,238,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(212,168,85,.3);border-radius:16px;padding:18px;margin-bottom:12px;text-align:center}
+.upgrade-title{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--text-dark);margin-bottom:8px}
+.upgrade-txt{font-size:13px;line-height:1.8;color:var(--text-mid);margin-bottom:14px}
+
+/* ALL CTAs — centred text */
+.btn-cta{display:block;width:100%;padding:16px 20px;border-radius:40px;
+  font-size:15px;font-weight:600;font-family:'Noto Serif TC',serif;letter-spacing:.08em;
+  text-align:center;cursor:pointer;border:none;text-decoration:none;
+  transition:transform .15s,box-shadow .15s;-webkit-appearance:none;margin-bottom:10px}
+.btn-cta:active{transform:scale(.97)}
+.btn-gold{background:linear-gradient(135deg,#F0C870,#D4A855,#B88A3A);color:#3A2008;box-shadow:0 5px 18px rgba(196,144,50,.32)}
+.btn-outline{background:rgba(255,252,246,.78);color:var(--text-mid);border:1.5px solid var(--border)!important;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn-retry{display:block;width:100%;padding:12px;background:none;border:none;font-family:'Noto Sans TC',sans-serif;font-size:12px;color:var(--text-muted);cursor:pointer;text-align:center;letter-spacing:.08em;text-decoration:underline;text-underline-offset:4px;margin-top:4px;-webkit-appearance:none}
+
+.safe-b{height:max(env(safe-area-inset-bottom,0px),16px);flex-shrink:0}
+.fu{opacity:0;transform:translateY(14px);animation:fadeUp .5s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ════════════ HERO ════════════ -->
+<div class="screen active" id="s-hero">
+  <div class="amb"></div>
+  <div class="top-bar">
+    <div class="top-bar-txt"><span class="dot"></span>4848 復活節企劃<span class="dot"></span>四月 · 金錢場<span class="dot"></span></div>
+  </div>
+  <div class="scroll-body">
+
+    <div class="hero-banner">
+      <svg viewBox="0 0 390 108" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <ellipse cx="32"  cy="76" rx="28" ry="20" fill="#F5E6DE" opacity=".7"  transform="rotate(-20 32 76)"/>
+        <ellipse cx="16"  cy="50" rx="22" ry="15" fill="#E8C8BC" opacity=".55" transform="rotate(-40 16 50)"/>
+        <ellipse cx="68"  cy="90" rx="24" ry="16" fill="#F5E6DE" opacity=".6"  transform="rotate(10 68 90)"/>
+        <ellipse cx="84"  cy="58" rx="20" ry="13" fill="#EAD9C2" opacity=".5"  transform="rotate(-30 84 58)"/>
+        <circle cx="32" cy="76" r="5" fill="#D4A855" opacity=".5"/>
+        <circle cx="68" cy="90" r="4" fill="#D4A855" opacity=".45"/>
+        <circle cx="16" cy="50" r="3.5" fill="#C9A86C" opacity=".4"/>
+        <ellipse cx="358" cy="70" rx="28" ry="20" fill="#F5E6DE" opacity=".7"  transform="rotate(20 358 70)"/>
+        <ellipse cx="374" cy="46" rx="22" ry="14" fill="#EAD9C2" opacity=".55" transform="rotate(40 374 46)"/>
+        <ellipse cx="322" cy="86" rx="24" ry="16" fill="#F5E6DE" opacity=".6"  transform="rotate(-10 322 86)"/>
+        <ellipse cx="306" cy="56" rx="20" ry="13" fill="#E8C8BC" opacity=".5"  transform="rotate(30 306 56)"/>
+        <circle cx="358" cy="70" r="5" fill="#D4A855" opacity=".5"/>
+        <circle cx="322" cy="86" r="4" fill="#D4A855" opacity=".45"/>
+        <circle cx="374" cy="46" r="3.5" fill="#C9A86C" opacity=".4"/>
+        <rect x="102" y="98" width="186" height="3" rx="1.5" fill="#C9A86C" opacity=".13"/>
+        <circle cx="155" cy="36" r="4" fill="#D4A855" opacity=".22"/>
+        <circle cx="240" cy="28" r="3" fill="#E8C8BC" opacity=".28"/>
+      </svg>
+    </div>
+
+    <!-- Hero egg: combined design matching uploaded image — lattice+sakura+speckle top, marble+dots middle, coral/white/gold stripes bottom -->
+    <div class="hero-egg-wrap fu" style="animation-delay:.08s">
+      <div class="hero-glow"></div>
+      <svg class="hero-egg-svg" viewBox="0 0 152 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- base gradient: ivory top, blush-peach lower -->
+          <radialGradient id="hg-base" cx="38%" cy="28%" r="72%">
+            <stop offset="0%"   stop-color="#FEFAF2"/>
+            <stop offset="45%"  stop-color="#F5EAD8"/>
+            <stop offset="80%"  stop-color="#EDD8C0"/>
+            <stop offset="100%" stop-color="#D8B898"/>
+          </radialGradient>
+          <!-- marble gradient for middle zone -->
+          <radialGradient id="hg-marble" cx="42%" cy="50%" r="60%">
+            <stop offset="0%"   stop-color="#FBF0E8"/>
+            <stop offset="40%"  stop-color="#F0C8B0"/>
+            <stop offset="80%"  stop-color="#E0A888"/>
+            <stop offset="100%" stop-color="#C88868"/>
+          </radialGradient>
+          <!-- specular highlight -->
+          <radialGradient id="hs" cx="34%" cy="26%" r="36%">
+            <stop offset="0%" stop-color="#FFFFF8" stop-opacity=".6"/>
+            <stop offset="100%" stop-color="#FFFFF8" stop-opacity="0"/>
+          </radialGradient>
+          <!-- shadow -->
+          <filter id="hf"><feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#A07040" flood-opacity=".24"/></filter>
+          <!-- clip to egg shape -->
+          <clipPath id="hc"><ellipse cx="76" cy="96" rx="64" ry="83"/></clipPath>
+          <!-- clip for upper 55% zone -->
+          <clipPath id="hc-top"><rect x="10" y="12" width="132" height="90"/></clipPath>
+          <!-- clip for middle marble zone (55–72%) -->
+          <clipPath id="hc-mid"><rect x="10" y="102" width="132" height="32"/></clipPath>
+          <!-- clip for stripe zone (72–100%) -->
+          <clipPath id="hc-bot"><rect x="10" y="134" width="132" height="70"/></clipPath>
+        </defs>
+
+        <!-- egg body base -->
+        <ellipse cx="76" cy="96" rx="64" ry="83" fill="url(#hg-base)" filter="url(#hf)"/>
+
+        <g clip-path="url(#hc)">
+
+          <!-- ══ TOP ZONE: ivory base + gold lattice + dandelion/sakura + speckle ══ -->
+          <!-- ivory-cream overlay for top zone -->
+          <ellipse cx="76" cy="60" rx="62" ry="54" fill="#FEFBF4" opacity=".55"/>
+
+          <!-- GOLD LATTICE LINES — matching image exactly -->
+          <g fill="none" stroke="#C9A86C" stroke-width="1.4" opacity=".78">
+            <!-- diagonal right-down -->
+            <line x1="18"  y1="14" x2="110" y2="110"/>
+            <line x1="30"  y1="12" x2="124" y2="110"/>
+            <line x1="44"  y1="12" x2="138" y2="110"/>
+            <line x1="58"  y1="12" x2="150" y2="110"/>
+            <line x1="72"  y1="12" x2="154" y2="100"/>
+            <line x1="6"   y1="14" x2="96"  y2="110"/>
+            <!-- diagonal right-up -->
+            <line x1="134" y1="14" x2="42"  y2="110"/>
+            <line x1="120" y1="12" x2="28"  y2="110"/>
+            <line x1="108" y1="12" x2="16"  y2="110"/>
+            <line x1="94"  y1="12" x2="4"   y2="108"/>
+            <line x1="148" y1="14" x2="56"  y2="110"/>
+          </g>
+
+          <!-- DANDELION 1 — top area -->
+          <g transform="translate(52,38)" fill="none" stroke="#C9A86C" stroke-width=".9" opacity=".72">
+            <line x1="0" y1="0" x2="0"  y2="-16"/>
+            <line x1="0" y1="0" x2="-8" y2="-14"/>
+            <line x1="0" y1="0" x2="8"  y2="-14"/>
+            <line x1="0" y1="0" x2="-12" y2="-9"/>
+            <line x1="0" y1="0" x2="12" y2="-9"/>
+            <line x1="0" y1="0" x2="-14" y2="-3"/>
+            <line x1="0" y1="0" x2="14" y2="-3"/>
+            <line x1="0" y1="0" x2="-14" y2="4"/>
+            <line x1="0" y1="0" x2="14"  y2="4"/>
+            <circle cx="0"   cy="-16" r="1.5" fill="#C9A86C"/>
+            <circle cx="-8"  cy="-14" r="1.5" fill="#C9A86C"/>
+            <circle cx="8"   cy="-14" r="1.5" fill="#C9A86C"/>
+            <circle cx="-12" cy="-9"  r="1.5" fill="#C9A86C"/>
+            <circle cx="12"  cy="-9"  r="1.5" fill="#C9A86C"/>
+            <circle cx="-14" cy="-3"  r="1.5" fill="#C9A86C"/>
+            <circle cx="14"  cy="-3"  r="1.5" fill="#C9A86C"/>
+            <circle cx="-14" cy="4"   r="1.5" fill="#C9A86C"/>
+            <circle cx="14"  cy="4"   r="1.5" fill="#C9A86C"/>
+          </g>
+
+          <!-- DANDELION 2 — smaller, right side -->
+          <g transform="translate(96,52)" fill="none" stroke="#C9A86C" stroke-width=".8" opacity=".65">
+            <line x1="0" y1="0" x2="0"  y2="-11"/>
+            <line x1="0" y1="0" x2="-6" y2="-9"/>
+            <line x1="0" y1="0" x2="6"  y2="-9"/>
+            <line x1="0" y1="0" x2="-9" y2="-4"/>
+            <line x1="0" y1="0" x2="9"  y2="-4"/>
+            <line x1="0" y1="0" x2="-10" y2="2"/>
+            <line x1="0" y1="0" x2="10"  y2="2"/>
+            <circle cx="0"  cy="-11" r="1.2" fill="#C9A86C"/>
+            <circle cx="-6" cy="-9"  r="1.2" fill="#C9A86C"/>
+            <circle cx="6"  cy="-9"  r="1.2" fill="#C9A86C"/>
+            <circle cx="-9" cy="-4"  r="1.2" fill="#C9A86C"/>
+            <circle cx="9"  cy="-4"  r="1.2" fill="#C9A86C"/>
+            <circle cx="-10" cy="2"  r="1.2" fill="#C9A86C"/>
+            <circle cx="10"  cy="2"  r="1.2" fill="#C9A86C"/>
+          </g>
+
+          <!-- SAKURA flower — top left of lattice -->
+          <g transform="translate(30,26)" fill="none" stroke="#C9A86C" stroke-width=".9" opacity=".7">
+            <ellipse cx="0" cy="-5.5" rx="2.8" ry="5.5"/>
+            <ellipse cx="0" cy="-5.5" rx="2.8" ry="5.5" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-5.5" rx="2.8" ry="5.5" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-5.5" rx="2.8" ry="5.5" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-5.5" rx="2.8" ry="5.5" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="2" fill="#C9A86C" opacity=".6"/>
+          </g>
+
+          <!-- SMALL SAKURA — right area -->
+          <g transform="translate(108,28)" fill="none" stroke="#C9A86C" stroke-width=".8" opacity=".6">
+            <ellipse cx="0" cy="-4" rx="2" ry="4"/>
+            <ellipse cx="0" cy="-4" rx="2" ry="4" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-4" rx="2" ry="4" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-4" rx="2" ry="4" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-4" rx="2" ry="4" transform="rotate(288)"/>
+            <circle cx="0" cy="0" r="1.5" fill="#C9A86C" opacity=".55"/>
+          </g>
+
+          <!-- GOLD SPECKLES in lattice diamonds -->
+          <circle cx="68"  cy="44" r="1.4" fill="#D4A040" opacity=".65"/>
+          <circle cx="82"  cy="36" r="1.0" fill="#D4A040" opacity=".60"/>
+          <circle cx="56"  cy="60" r="1.6" fill="#D4A040" opacity=".62"/>
+          <circle cx="90"  cy="64" r="1.2" fill="#D4A040" opacity=".60"/>
+          <circle cx="74"  cy="74" r="1.4" fill="#D4A040" opacity=".58"/>
+          <circle cx="44"  cy="50" r="1.0" fill="#D4A040" opacity=".55"/>
+          <circle cx="100" cy="50" r="1.2" fill="#D4A040" opacity=".58"/>
+          <circle cx="62"  cy="82" r="1.0" fill="#D4A040" opacity=".55"/>
+          <circle cx="84"  cy="88" r="1.2" fill="#D4A040" opacity=".55"/>
+          <!-- larger gold blob speckles -->
+          <ellipse cx="70" cy="68" rx="3" ry="1.8" fill="#D4A040" opacity=".38" transform="rotate(-15 70 68)"/>
+          <ellipse cx="50" cy="76" rx="2.5" ry="1.5" fill="#D4A040" opacity=".35" transform="rotate(20 50 76)"/>
+          <ellipse cx="96" cy="78" rx="2.5" ry="1.5" fill="#D4A040" opacity=".35" transform="rotate(-10 96 78)"/>
+
+          <!-- ══ MIDDLE ZONE: marble swirl + polka dots ══ -->
+          <!-- marble base fill -->
+          <rect x="10" y="101" width="132" height="33" fill="url(#hg-marble)" opacity=".85"/>
+          <!-- marble swirl paths -->
+          <g fill="none" opacity=".9">
+            <path d="M14 108 Q35 100 58 110 Q78 120 70 130 Q60 140 40 134 Q20 128 14 118 Q10 110 20 106" stroke="#F5D0B0" stroke-width="5.5"/>
+            <path d="M44 101 Q68 96 88 108 Q104 118 96 130 Q86 140 68 136" stroke="#F5D0B0" stroke-width="5"/>
+            <path d="M72 101 Q95 98 112 114 Q124 126 114 134" stroke="#EDB898" stroke-width="4.5"/>
+            <path d="M20 122 Q38 114 56 120 Q70 126 66 134" stroke="#FFF0E0" stroke-width="4" opacity=".7"/>
+            <path d="M80 118 Q96 112 110 122 Q120 130 112 134" stroke="#FFF0E0" stroke-width="3.5" opacity=".65"/>
+          </g>
+          <!-- POLKA DOTS on marble -->
+          <circle cx="32"  cy="112" r="5.5" fill="#E8B890" opacity=".72"/>
+          <circle cx="54"  cy="106" r="5"   fill="#C8A070" opacity=".68"/>
+          <circle cx="76"  cy="112" r="6"   fill="#F0DCBC" opacity=".75"/>
+          <circle cx="98"  cy="108" r="5"   fill="#E8B890" opacity=".70"/>
+          <circle cx="120" cy="115" r="4.5" fill="#C8A070" opacity=".65"/>
+          <circle cx="42"  cy="124" r="5"   fill="#F0DCBC" opacity=".70"/>
+          <circle cx="64"  cy="128" r="5.5" fill="#E8B890" opacity=".68"/>
+          <circle cx="86"  cy="124" r="5"   fill="#C8A070" opacity=".65"/>
+          <circle cx="108" cy="128" r="5"   fill="#F0DCBC" opacity=".68"/>
+
+          <!-- ══ BOTTOM ZONE: coral / white / gold stripes ══ -->
+          <!-- Coral wide stripe -->
+          <rect x="10" y="135" width="132" height="12" fill="#E89878" opacity=".82"/>
+          <!-- White stripe -->
+          <rect x="10" y="149" width="132" height="8"  fill="#F8F2EC" opacity=".92"/>
+          <!-- Gold metallic stripe -->
+          <rect x="10" y="159" width="132" height="9"  fill="#C9A86C" opacity=".80"/>
+          <!-- Thin white -->
+          <rect x="10" y="170" width="132" height="5"  fill="#F8F2EC" opacity=".88"/>
+          <!-- Coral bottom -->
+          <rect x="10" y="177" width="132" height="8"  fill="#E89878" opacity=".70"/>
+
+          <!-- horizontal divider line between lattice and marble -->
+          <line x1="18" y1="102" x2="134" y2="102" stroke="#C9A86C" stroke-width="1.5" opacity=".55"/>
+          <!-- divider between marble and stripe -->
+          <line x1="14" y1="135" x2="138" y2="135" stroke="#C9A86C" stroke-width="1.5" opacity=".50"/>
+
+        </g>
+
+        <!-- specular highlight -->
+        <ellipse cx="52" cy="58" rx="18" ry="12" fill="url(#hs)" transform="rotate(-18 52 58)"/>
+      </svg>
+    </div>
+
+    <div class="hero-orn fu" style="animation-delay:.18s">✦ ◇ ✦</div>
+    <div class="hero-kicker fu" style="animation-delay:.24s">APRIL · 四月彩蛋 · 金錢場</div>
+    <h1 class="hero-title fu" style="animation-delay:.3s">你的財庫，<br>到底在哪裡漏？</h1>
+    <p class="hero-desc fu" style="animation-delay:.38s">不是叫你記帳，也不是零錢管理。<br>這份測驗，幫你找到那個<br>最上游、一直沒補到的核心洞。</p>
+    <div class="div-row fu" style="animation-delay:.44s"><div class="div-line"></div><span class="orn">✦</span><div class="div-line"></div></div>
+    <div class="stats fu" style="animation-delay:.5s">
+      <div class="stat"><span class="stat-n">七</span><span class="stat-l">道題</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-n">八</span><span class="stat-l">種結果</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-n">免費</span><span class="stat-l">約 2 分鐘</span></div>
+    </div>
+    <button class="btn-start fu" style="animation-delay:.58s" onclick="startQuiz()">✦ &nbsp;開始抽彩蛋 &nbsp;→</button>
+    <p class="hero-note fu" style="animation-delay:.64s;text-align:center;width:100%;">抽完就知道你的錢包到底哪裡漏洞</p>
+    <div class="safe-b"></div>
+  </div>
+</div>
+
+<!-- ════════════ QUIZ ════════════ -->
+<div class="screen" id="s-quiz">
+  <div class="amb"></div>
+  <div class="top-bar"><div class="top-bar-txt"><span class="dot"></span>4848 · 四月金錢測驗<span class="dot"></span></div></div>
+  <div class="scroll-body">
+    <div class="pips-wrap">
+      <span class="pips-label" id="pipLabel">題目 1 / 7</span>
+      <div class="pips" id="pipRow">
+        <div class="pip cur"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div>
+      </div>
+    </div>
+    <div class="q-card" id="qCard"></div>
+    <div class="q-nav">
+      <button class="btn-back" id="btnBack" onclick="prevQ()" style="display:none">← 返回</button>
+      <button class="btn-next" id="btnNext" onclick="nextQ()" disabled>下一題 →</button>
+    </div>
+    <div class="safe-b"></div>
+  </div>
+</div>
+
+<!-- ════════════ LOADING ════════════ -->
+<div class="screen" id="s-loading">
+  <div class="amb"></div>
+  <div class="top-bar"><div class="top-bar-txt"><span class="dot"></span>分析中<span class="dot"></span></div></div>
+  <div class="scroll-body">
+    <div class="load-eggs">
+      <svg class="load-egg" width="46" height="58" viewBox="0 0 46 58">
+        <defs><radialGradient id="ll1" cx="38%" cy="30%" r="66%"><stop offset="0%" stop-color="#F5E4DC"/><stop offset="100%" stop-color="#D4967A"/></radialGradient></defs>
+        <ellipse cx="23" cy="33" rx="19" ry="24" fill="url(#ll1)"/>
+        <line x1="10" y1="20" x2="36" y2="46" stroke="#C9A86C" stroke-width=".8" opacity=".5"/>
+        <line x1="36" y1="20" x2="10" y2="46" stroke="#C9A86C" stroke-width=".8" opacity=".5"/>
+      </svg>
+      <svg class="load-egg" width="46" height="58" viewBox="0 0 46 58">
+        <defs><radialGradient id="ll2" cx="40%" cy="32%" r="68%"><stop offset="0%" stop-color="#FBF0E8"/><stop offset="60%" stop-color="#E8B898"/><stop offset="100%" stop-color="#C88868"/></radialGradient></defs>
+        <ellipse cx="23" cy="33" rx="19" ry="24" fill="url(#ll2)"/>
+        <path d="M8 28 Q18 22 28 32 Q36 40 26 46" fill="none" stroke="#F0C8A8" stroke-width="1.2" opacity=".55"/>
+      </svg>
+      <svg class="load-egg" width="46" height="58" viewBox="0 0 46 58">
+        <defs><radialGradient id="ll3" cx="38%" cy="30%" r="66%"><stop offset="0%" stop-color="#F5E8CC"/><stop offset="60%" stop-color="#D4A855"/><stop offset="100%" stop-color="#8C6020"/></radialGradient></defs>
+        <ellipse cx="23" cy="33" rx="19" ry="24" fill="url(#ll3)"/>
+        <circle cx="14" cy="28" r="1.5" fill="#FFF0A8" opacity=".7"/>
+        <circle cx="30" cy="22" r="1.2" fill="#FFF0A8" opacity=".65"/>
+        <circle cx="34" cy="38" r="1.5" fill="#FFF0A8" opacity=".65"/>
+      </svg>
+    </div>
+    <div class="load-txt">正在為你找漏洞…</div>
+    <div class="load-sub">從七道題的直覺反應中，抓出最核心的那個洞</div>
+  </div>
+</div>
+
+<!-- ════════════ RESULT ════════════ -->
+<div class="screen" id="s-result">
+  <div class="amb"></div>
+  <div class="top-bar"><div class="top-bar-txt"><span class="dot"></span>測驗結果 · 四月金錢彩蛋<span class="dot"></span></div></div>
+  <div class="scroll-body" id="resultContent"></div>
+</div>
+
+<!-- ════════ HIDDEN SVG SYMBOL LIBRARY ════════ -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+
+<!-- EGG 1: Image 1 — rose-gold diamond lattice on blush-cream, prominent gold lines -->
+<symbol id="egg-1" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g1" cx="36%" cy="28%" r="72%">
+      <stop offset="0%"   stop-color="#FEF4EE"/>
+      <stop offset="45%"  stop-color="#F2D8C8"/>
+      <stop offset="80%"  stop-color="#E4B8A0"/>
+      <stop offset="100%" stop-color="#C89080"/>
+    </radialGradient>
+    <radialGradient id="s1" cx="32%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".6"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c1"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f1"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#B06050" flood-opacity=".28"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g1)" filter="url(#f1)"/>
+  <g clip-path="url(#c1)" fill="none" stroke="#C9A86C" stroke-width="1.6" opacity=".82">
+    <!-- diagonal lines A (top-left to bottom-right) -->
+    <line x1="-2"  y1="8"  x2="94"  y2="145"/>
+    <line x1="10"  y1="8"  x2="108" y2="145"/>
+    <line x1="24"  y1="8"  x2="122" y2="145"/>
+    <line x1="38"  y1="8"  x2="136" y2="145"/>
+    <line x1="52"  y1="8"  x2="150" y2="145"/>
+    <line x1="66"  y1="8"  x2="164" y2="145"/>
+    <line x1="80"  y1="8"  x2="176" y2="145"/>
+    <!-- diagonal lines B (top-right to bottom-left) -->
+    <line x1="122" y1="8"  x2="26"  y2="145"/>
+    <line x1="108" y1="8"  x2="12"  y2="145"/>
+    <line x1="94"  y1="8"  x2="-2"  y2="145"/>
+    <line x1="136" y1="8"  x2="40"  y2="145"/>
+    <line x1="150" y1="8"  x2="54"  y2="145"/>
+  </g>
+  <ellipse cx="42" cy="48" rx="14" ry="9" fill="url(#s1)" transform="rotate(-16 42 48)"/>
+</symbol>
+
+<!-- EGG 2: Image 2 — rose-peach marble with flowing ivory swirls, warm -->
+<symbol id="egg-2" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g2" cx="42%" cy="35%" r="68%">
+      <stop offset="0%"   stop-color="#FDF4EC"/>
+      <stop offset="30%"  stop-color="#F5D0B8"/>
+      <stop offset="65%"  stop-color="#E8A888"/>
+      <stop offset="100%" stop-color="#D08060"/>
+    </radialGradient>
+    <clipPath id="c2"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f2"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#A87050" flood-opacity=".25"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g2)" filter="url(#f2)"/>
+  <g clip-path="url(#c2)" fill="none">
+    <!-- large swirl loops, ivory-cream highlight -->
+    <path d="M16 58 Q38 38 60 58 Q80 76 65 98 Q50 120 30 110 Q10 98 16 78 Q20 62 40 54" stroke="#FFF0E0" stroke-width="7" opacity=".6"/>
+    <path d="M40 28 Q65 18 82 44 Q96 65 84 90 Q70 112 50 108 Q28 104 22 82" stroke="#FFF0E0" stroke-width="6" opacity=".52"/>
+    <path d="M60 14 Q86 24 96 52 Q104 76 90 98 Q78 116 58 116" stroke="#F5D8C0" stroke-width="5.5" opacity=".55"/>
+    <path d="M18 84 Q32 68 50 74 Q66 80 68 96 Q70 112 55 120 Q38 126 24 114" stroke="#FFE8D4" stroke-width="5" opacity=".52"/>
+    <path d="M72 22 Q96 34 102 62 Q108 86 94 108" stroke="#F0C8A8" stroke-width="4.5" opacity=".44"/>
+    <!-- cream ribbon highlight -->
+    <path d="M28 44 Q46 34 62 48 Q76 62 70 84 Q62 102 44 98 Q26 94 22 72 Q20 54 32 44" stroke="#FFF8F0" stroke-width="4" opacity=".55"/>
+  </g>
+  <!-- soft specular -->
+  <ellipse cx="42" cy="50" rx="15" ry="9" fill="#FFFFFF" opacity=".22" transform="rotate(-20 42 50)"/>
+</symbol>
+
+<!-- EGG 3: Image 3 — pure ivory/cream with gold sakura + dandelions, delicate -->
+<symbol id="egg-3" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g3" cx="34%" cy="26%" r="72%">
+      <stop offset="0%"   stop-color="#FEFCF6"/>
+      <stop offset="55%"  stop-color="#F8F0DC"/>
+      <stop offset="100%" stop-color="#EEDDBC"/>
+    </radialGradient>
+    <radialGradient id="s3" cx="32%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c3"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f3"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#9A8848" flood-opacity=".22"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g3)" filter="url(#f3)"/>
+  <g clip-path="url(#c3)" fill="none" stroke="#C4A060" stroke-width="1.1">
+    <!-- SAKURA 1 — large, upper left -->
+    <g transform="translate(38,34)">
+      <ellipse cx="0" cy="-8"  rx="4.5" ry="8.5" opacity=".72"/>
+      <ellipse cx="0" cy="-8"  rx="4.5" ry="8.5" opacity=".72" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-8"  rx="4.5" ry="8.5" opacity=".72" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-8"  rx="4.5" ry="8.5" opacity=".72" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-8"  rx="4.5" ry="8.5" opacity=".72" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="3" fill="#C4A060" opacity=".65"/>
+    </g>
+    <!-- SAKURA 2 — upper right -->
+    <g transform="translate(86,46)">
+      <ellipse cx="0" cy="-6"  rx="3.2" ry="6.2" opacity=".65"/>
+      <ellipse cx="0" cy="-6"  rx="3.2" ry="6.2" opacity=".65" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-6"  rx="3.2" ry="6.2" opacity=".65" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-6"  rx="3.2" ry="6.2" opacity=".65" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-6"  rx="3.2" ry="6.2" opacity=".65" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2.2" fill="#C4A060" opacity=".58"/>
+    </g>
+    <!-- SAKURA 3 — lower left -->
+    <g transform="translate(30,96)">
+      <ellipse cx="0" cy="-7"  rx="4" ry="7" opacity=".62"/>
+      <ellipse cx="0" cy="-7"  rx="4" ry="7" opacity=".62" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-7"  rx="4" ry="7" opacity=".62" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-7"  rx="4" ry="7" opacity=".62" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-7"  rx="4" ry="7" opacity=".62" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="2.5" fill="#C4A060" opacity=".58"/>
+    </g>
+    <!-- DANDELION 1 — large, right side -->
+    <g transform="translate(84,100)" opacity=".68">
+      <line x1="0" y1="0" x2="0"   y2="-18"/>
+      <line x1="0" y1="0" x2="-8"  y2="-16"/>
+      <line x1="0" y1="0" x2="8"   y2="-16"/>
+      <line x1="0" y1="0" x2="-13" y2="-10"/>
+      <line x1="0" y1="0" x2="13"  y2="-10"/>
+      <line x1="0" y1="0" x2="-16" y2="-3"/>
+      <line x1="0" y1="0" x2="16"  y2="-3"/>
+      <line x1="0" y1="0" x2="-16" y2="5"/>
+      <line x1="0" y1="0" x2="16"  y2="5"/>
+      <circle cx="0"   cy="-18" r="1.8" fill="#C4A060"/>
+      <circle cx="-8"  cy="-16" r="1.8" fill="#C4A060"/>
+      <circle cx="8"   cy="-16" r="1.8" fill="#C4A060"/>
+      <circle cx="-13" cy="-10" r="1.8" fill="#C4A060"/>
+      <circle cx="13"  cy="-10" r="1.8" fill="#C4A060"/>
+      <circle cx="-16" cy="-3"  r="1.8" fill="#C4A060"/>
+      <circle cx="16"  cy="-3"  r="1.8" fill="#C4A060"/>
+      <circle cx="-16" cy="5"   r="1.8" fill="#C4A060"/>
+      <circle cx="16"  cy="5"   r="1.8" fill="#C4A060"/>
+    </g>
+    <!-- DANDELION 2 — small, center left -->
+    <g transform="translate(50,70)" opacity=".58">
+      <line x1="0" y1="0" x2="0"   y2="-12"/>
+      <line x1="0" y1="0" x2="-6"  y2="-10"/>
+      <line x1="0" y1="0" x2="6"   y2="-10"/>
+      <line x1="0" y1="0" x2="-9"  y2="-5"/>
+      <line x1="0" y1="0" x2="9"   y2="-5"/>
+      <line x1="0" y1="0" x2="-10" y2="2"/>
+      <line x1="0" y1="0" x2="10"  y2="2"/>
+      <circle cx="0"  cy="-12" r="1.4" fill="#C4A060"/>
+      <circle cx="-6" cy="-10" r="1.4" fill="#C4A060"/>
+      <circle cx="6"  cy="-10" r="1.4" fill="#C4A060"/>
+      <circle cx="-9" cy="-5"  r="1.4" fill="#C4A060"/>
+      <circle cx="9"  cy="-5"  r="1.4" fill="#C4A060"/>
+    </g>
+    <!-- scatter small petals -->
+    <path d="M60 55 Q63 50 67 54 Q63 58 60 55" stroke-width=".9" opacity=".55"/>
+    <path d="M24 65 Q27 60 31 64 Q27 68 24 65" stroke-width=".9" opacity=".52"/>
+    <path d="M92 68 Q95 63 99 67 Q95 71 92 68" stroke-width=".9" opacity=".52"/>
+    <path d="M55 120 Q58 115 62 119 Q58 123 55 120" stroke-width=".8" opacity=".48"/>
+  </g>
+  <ellipse cx="42" cy="48" rx="14" ry="9" fill="url(#s3)" transform="rotate(-18 42 48)"/>
+</symbol>
+
+<!-- EGG 4: Image 4 — warm cream/tan base, heavy gold & white speckles -->
+<symbol id="egg-4" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g4" cx="36%" cy="28%" r="72%">
+      <stop offset="0%"   stop-color="#FDF4DC"/>
+      <stop offset="45%"  stop-color="#EED4A0"/>
+      <stop offset="80%"  stop-color="#D8AE68"/>
+      <stop offset="100%" stop-color="#B88840"/>
+    </radialGradient>
+    <radialGradient id="s4" cx="32%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c4"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f4"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#9A7830" flood-opacity=".28"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g4)" filter="url(#f4)"/>
+  <g clip-path="url(#c4)">
+    <!-- large gold blobs -->
+    <circle cx="36" cy="52" r="5"   fill="#C89830" opacity=".62"/>
+    <circle cx="54" cy="40" r="3.5" fill="#C89830" opacity=".58"/>
+    <circle cx="76" cy="44" r="6"   fill="#C89830" opacity=".65"/>
+    <circle cx="92" cy="62" r="4"   fill="#C89830" opacity=".60"/>
+    <circle cx="86" cy="84" r="5.5" fill="#C89830" opacity=".58"/>
+    <circle cx="72" cy="108" r="3.5" fill="#C89830" opacity=".60"/>
+    <circle cx="50" cy="116" r="5"   fill="#C89830" opacity=".62"/>
+    <circle cx="30" cy="98" r="4"    fill="#C89830" opacity=".58"/>
+    <circle cx="46" cy="74" r="3"    fill="#C89830" opacity=".55"/>
+    <circle cx="94" cy="48" r="2.5"  fill="#C89830" opacity=".55"/>
+    <circle cx="100" cy="100" r="4"  fill="#C89830" opacity=".55"/>
+    <circle cx="24" cy="68" r="2.5"  fill="#C89830" opacity=".52"/>
+    <!-- irregular blob shapes -->
+    <ellipse cx="52" cy="60" rx="5.5" ry="3.5" fill="#C89830" opacity=".45" transform="rotate(-25 52 60)"/>
+    <ellipse cx="82" cy="95" rx="5"   ry="3"   fill="#C89830" opacity=".42" transform="rotate(18 82 95)"/>
+    <ellipse cx="40" cy="110" rx="4.5" ry="3"  fill="#C89830" opacity=".45" transform="rotate(-10 40 110)"/>
+    <!-- white speckle dots -->
+    <circle cx="64" cy="56" r="2.5" fill="#FFFFFF" opacity=".55"/>
+    <circle cx="44" cy="90" r="2"   fill="#FFFFFF" opacity=".50"/>
+    <circle cx="86" cy="72" r="2"   fill="#FFFFFF" opacity=".50"/>
+    <circle cx="58" cy="102" r="1.8" fill="#FFFFFF" opacity=".45"/>
+    <circle cx="78" cy="120" r="1.5" fill="#FFFFFF" opacity=".42"/>
+    <!-- tiny dust particles -->
+    <circle cx="70" cy="70" r="1.5" fill="#C89830" opacity=".55"/>
+    <circle cx="28" cy="82" r="1.2" fill="#C89830" opacity=".50"/>
+    <circle cx="96" cy="76" r="1.2" fill="#C89830" opacity=".50"/>
+  </g>
+  <ellipse cx="42" cy="48" rx="14" ry="9" fill="url(#s4)" transform="rotate(-18 42 48)"/>
+</symbol>
+
+<!-- EGG 5: Image 5 — white base with bold coral/white/gold horizontal stripes -->
+<symbol id="egg-5" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g5" cx="35%" cy="26%" r="72%">
+      <stop offset="0%"   stop-color="#FFF8F2"/>
+      <stop offset="55%"  stop-color="#F5E8DC"/>
+      <stop offset="100%" stop-color="#E8C8B4"/>
+    </radialGradient>
+    <radialGradient id="s5" cx="32%" cy="24%" r="36%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c5"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f5"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#A07858" flood-opacity=".24"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g5)" filter="url(#f5)"/>
+  <g clip-path="url(#c5)">
+    <!-- Top white zone -->
+    <rect x="0" y="10" width="130" height="14" fill="#FFF8F2" opacity=".9"/>
+    <!-- CORAL band 1 -->
+    <rect x="0" y="26" width="130" height="10" fill="#E88870" opacity=".82"/>
+    <!-- WHITE band -->
+    <rect x="0" y="38" width="130" height="8"  fill="#FFF0E8" opacity=".94"/>
+    <!-- GOLD band -->
+    <rect x="0" y="48" width="130" height="10" fill="#C8A050" opacity=".82"/>
+    <!-- WHITE band -->
+    <rect x="0" y="60" width="130" height="8"  fill="#FFF0E8" opacity=".94"/>
+    <!-- CORAL band 2 -->
+    <rect x="0" y="70" width="130" height="10" fill="#E88870" opacity=".78"/>
+    <!-- WHITE band -->
+    <rect x="0" y="82" width="130" height="8"  fill="#FFF8F2" opacity=".94"/>
+    <!-- LIGHT/cream band -->
+    <rect x="0" y="92" width="130" height="9"  fill="#F8EEE0" opacity=".88"/>
+    <!-- GOLD band 2 -->
+    <rect x="0" y="103" width="130" height="10" fill="#C8A050" opacity=".78"/>
+    <!-- WHITE band -->
+    <rect x="0" y="115" width="130" height="7"  fill="#FFF0E8" opacity=".94"/>
+    <!-- CORAL band 3 -->
+    <rect x="0" y="124" width="130" height="10" fill="#E88870" opacity=".72"/>
+    <!-- white bottom -->
+    <rect x="0" y="136" width="130" height="8"  fill="#FFF8F2" opacity=".9"/>
+  </g>
+  <ellipse cx="42" cy="46" rx="14" ry="8" fill="url(#s5)" transform="rotate(-16 42 46)"/>
+</symbol>
+
+<!-- EGG 6: Image 6 — cream base with painted peach+white botanical flowers -->
+<symbol id="egg-6" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g6" cx="36%" cy="28%" r="72%">
+      <stop offset="0%"   stop-color="#FEFDF4"/>
+      <stop offset="55%"  stop-color="#F8F0DC"/>
+      <stop offset="100%" stop-color="#EEDDBC"/>
+    </radialGradient>
+    <radialGradient id="s6" cx="32%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".52"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c6"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f6"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#9A8848" flood-opacity=".22"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g6)" filter="url(#f6)"/>
+  <g clip-path="url(#c6)">
+    <!-- LARGE peach flower lower-left -->
+    <g transform="translate(30,105)">
+      <ellipse cx="-10" cy="0"  rx="9"   ry="5"   fill="#ECA882" opacity=".78" transform="rotate(30 -10 0)"/>
+      <ellipse cx="10"  cy="0"  rx="9"   ry="5"   fill="#ECA882" opacity=".78" transform="rotate(-30 10 0)"/>
+      <ellipse cx="0"   cy="-10" rx="5"  ry="9"   fill="#ECA882" opacity=".78"/>
+      <ellipse cx="0"   cy="10"  rx="5"  ry="9"   fill="#ECA882" opacity=".72"/>
+      <ellipse cx="-8"  cy="-8"  rx="7"  ry="4"   fill="#F0B890" opacity=".65" transform="rotate(-45 -8 -8)"/>
+      <ellipse cx="8"   cy="-8"  rx="7"  ry="4"   fill="#F0B890" opacity=".65" transform="rotate(45 8 -8)"/>
+      <circle  cx="0"   cy="0"   r="5.5" fill="#D4A060" opacity=".72"/>
+      <ellipse cx="-18" cy="10"  rx="10" ry="4.5" fill="#8A7848" opacity=".42" transform="rotate(-25 -18 10)"/>
+      <ellipse cx="18"  cy="10"  rx="10" ry="4.5" fill="#8A7848" opacity=".40" transform="rotate(25 18 10)"/>
+      <ellipse cx="0"   cy="18"  rx="7"  ry="3.5" fill="#8A7848" opacity=".38"/>
+    </g>
+    <!-- MEDIUM white flower upper-right -->
+    <g transform="translate(86,50)">
+      <ellipse cx="-8"  cy="0"  rx="7"   ry="4"   fill="#F8ECD8" opacity=".82" transform="rotate(25 -8 0)"/>
+      <ellipse cx="8"   cy="0"  rx="7"   ry="4"   fill="#F8ECD8" opacity=".82" transform="rotate(-25 8 0)"/>
+      <ellipse cx="0"   cy="-8" rx="4"   ry="7"   fill="#F8ECD8" opacity=".82"/>
+      <ellipse cx="0"   cy="8"  rx="4"   ry="7"   fill="#F8ECD8" opacity=".76"/>
+      <ellipse cx="-6"  cy="-6" rx="5"   ry="3"   fill="#F0D8BC" opacity=".68" transform="rotate(-45 -6 -6)"/>
+      <ellipse cx="6"   cy="-6" rx="5"   ry="3"   fill="#F0D8BC" opacity=".68" transform="rotate(45 6 -6)"/>
+      <circle  cx="0"   cy="0"  r="4"    fill="#C8A040" opacity=".68"/>
+      <ellipse cx="-14" cy="8"  rx="8"   ry="3.5" fill="#8A7848" opacity=".40" transform="rotate(-20 -14 8)"/>
+      <ellipse cx="4"   cy="14" rx="6"   ry="3"   fill="#8A7848" opacity=".36" transform="rotate(15 4 14)"/>
+    </g>
+    <!-- SMALL peach flower top-left -->
+    <g transform="translate(28,48)" opacity=".8">
+      <ellipse cx="-6"  cy="0"  rx="5.5" ry="3"   fill="#ECA882" transform="rotate(22 -6 0)"/>
+      <ellipse cx="6"   cy="0"  rx="5.5" ry="3"   fill="#ECA882" transform="rotate(-22 6 0)"/>
+      <ellipse cx="0"   cy="-6" rx="3"   ry="5.5" fill="#ECA882"/>
+      <ellipse cx="0"   cy="6"  rx="3"   ry="5.5" fill="#ECA882"/>
+      <circle  cx="0"   cy="0"  r="3"    fill="#D4A060" opacity=".68"/>
+      <ellipse cx="12"  cy="6"  rx="7"   ry="3"   fill="#8A7848" opacity=".38" transform="rotate(22 12 6)"/>
+    </g>
+    <!-- bud details -->
+    <line x1="60" y1="40" x2="60" y2="30" stroke="#8A7848" stroke-width="1" opacity=".42"/>
+    <circle cx="60" cy="30" r="2.5" fill="#ECA882" opacity=".55"/>
+    <line x1="74" y1="124" x2="74" y2="134" stroke="#8A7848" stroke-width="1" opacity=".40"/>
+    <circle cx="74" cy="134" r="2.5" fill="#F0C8A0" opacity=".52"/>
+    <line x1="42" y1="130" x2="38" y2="140" stroke="#8A7848" stroke-width=".8" opacity=".38"/>
+    <circle cx="38" cy="140" r="2" fill="#ECA882" opacity=".48"/>
+  </g>
+  <ellipse cx="42" cy="48" rx="14" ry="9" fill="url(#s6)" transform="rotate(-18 42 48)"/>
+</symbol>
+
+<!-- EGG 7: Image 7 — bright white base, large clear polka dots (peach/tan/cream) -->
+<symbol id="egg-7" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g7" cx="36%" cy="26%" r="72%">
+      <stop offset="0%"   stop-color="#FEFEF8"/>
+      <stop offset="50%"  stop-color="#F8F2E4"/>
+      <stop offset="100%" stop-color="#EEE0C4"/>
+    </radialGradient>
+    <radialGradient id="s7" cx="32%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c7"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f7"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#9A8848" flood-opacity=".22"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g7)" filter="url(#f7)"/>
+  <g clip-path="url(#c7)">
+    <!-- row 1 -->
+    <circle cx="28" cy="44" r="9"   fill="#E8B488" opacity=".75"/>
+    <circle cx="56" cy="34" r="7.5" fill="#C8A468" opacity=".72"/>
+    <circle cx="82" cy="42" r="9.5" fill="#EAC08A" opacity=".74"/>
+    <!-- row 2 -->
+    <circle cx="15" cy="68" r="7.5" fill="#F0D4A8" opacity=".78"/>
+    <circle cx="44" cy="60" r="9"   fill="#C8A468" opacity=".70"/>
+    <circle cx="72" cy="66" r="8"   fill="#F0D4A8" opacity=".76"/>
+    <circle cx="100" cy="58" r="8"  fill="#E8B488" opacity=".72"/>
+    <!-- row 3 -->
+    <circle cx="24" cy="92" r="9.5" fill="#E8B488" opacity=".74"/>
+    <circle cx="54" cy="86" r="8.5" fill="#F0D4A8" opacity=".76"/>
+    <circle cx="82" cy="92" r="9"   fill="#C8A468" opacity=".70"/>
+    <!-- row 4 -->
+    <circle cx="36" cy="116" r="9"  fill="#C8A468" opacity=".68"/>
+    <circle cx="64" cy="110" r="8"  fill="#E8B488" opacity=".72"/>
+    <circle cx="92" cy="116" r="7.5" fill="#F0D4A8" opacity=".68"/>
+    <!-- row 5 (near bottom) -->
+    <circle cx="20" cy="130" r="7"  fill="#F0D4A8" opacity=".62"/>
+    <circle cx="50" cy="132" r="7.5" fill="#C8A468" opacity=".62"/>
+    <circle cx="78" cy="134" r="7"  fill="#E8B488" opacity=".60"/>
+  </g>
+  <ellipse cx="42" cy="46" rx="14" ry="9" fill="url(#s7)" transform="rotate(-18 42 46)"/>
+</symbol>
+
+<!-- EGG 8: Image 8 — ultra-smooth gold ombre, no texture, 4-point star accent -->
+<symbol id="egg-8" viewBox="0 0 120 142">
+  <defs>
+    <radialGradient id="g8" cx="36%" cy="26%" r="74%">
+      <stop offset="0%"   stop-color="#FDF4D8"/>
+      <stop offset="28%"  stop-color="#EED494"/>
+      <stop offset="58%"  stop-color="#D4A848"/>
+      <stop offset="82%"  stop-color="#B08428"/>
+      <stop offset="100%" stop-color="#806010"/>
+    </radialGradient>
+    <radialGradient id="s8" cx="32%" cy="24%" r="38%">
+      <stop offset="0%" stop-color="#FFFCE8" stop-opacity=".68"/>
+      <stop offset="100%" stop-color="#FFFCE8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c8"><ellipse cx="60" cy="76" rx="52" ry="66"/></clipPath>
+    <filter id="f8"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#886018" flood-opacity=".32"/></filter>
+  </defs>
+  <ellipse cx="60" cy="76" rx="52" ry="66" fill="url(#g8)" filter="url(#f8)"/>
+  <g clip-path="url(#c8)">
+    <!-- subtle warm highlight center -->
+    <ellipse cx="60" cy="65" rx="35" ry="28" fill="#FFF8D8" opacity=".14"/>
+    <!-- fine gold dust speckles -->
+    <circle cx="36" cy="54" r="2.8" fill="#FFF0A0" opacity=".72"/>
+    <circle cx="56" cy="42" r="2"   fill="#FFF0A0" opacity=".68"/>
+    <circle cx="80" cy="48" r="3.2" fill="#FFF0A0" opacity=".72"/>
+    <circle cx="96" cy="66" r="2.5" fill="#FFF0A0" opacity=".68"/>
+    <circle cx="90" cy="90" r="2.8" fill="#FFF0A0" opacity=".65"/>
+    <circle cx="74" cy="112" r="2"  fill="#FFF0A0" opacity=".62"/>
+    <circle cx="48" cy="120" r="2.5" fill="#FFF0A0" opacity=".65"/>
+    <circle cx="28" cy="100" r="2"  fill="#FFF0A0" opacity=".62"/>
+    <circle cx="54" cy="74"  r="1.8" fill="#FFF0A0" opacity=".58"/>
+    <!-- larger gold flecks -->
+    <circle cx="42" cy="50" r="5"   fill="#F0C840" opacity=".42"/>
+    <circle cx="88" cy="82" r="5.5" fill="#F0C840" opacity=".36"/>
+    <circle cx="50" cy="108" r="4.5" fill="#F0C840" opacity=".38"/>
+    <circle cx="26" cy="80" r="4"   fill="#F0C840" opacity=".32"/>
+    <!-- 4-POINTED STAR (prominent, bottom-right, key feature of Image 8) -->
+    <path d="M97 118 L99 124 L105 126 L99 128 L97 134 L95 128 L89 126 L95 124 Z" fill="#FFFCE0" opacity=".92"/>
+    <!-- secondary tiny star -->
+    <path d="M22 55 L23 58 L26 59 L23 60 L22 63 L21 60 L18 59 L21 58 Z" fill="#FFFCE0" opacity=".70"/>
+  </g>
+  <ellipse cx="42" cy="48" rx="15" ry="9" fill="url(#s8)" transform="rotate(-18 42 48)"/>
+</symbol>
+
+</defs>
+</svg>
+
+<script>
+/* ─── EGG MAP ─── */
+const EGG = {
+  "方便漏手型":"egg-1","拖延加損型":"egg-2","失序重買型":"egg-3","人情失血型":"egg-4",
+  "優惠失守型":"egg-5","情緒止痛型":"egg-6","注意分流型":"egg-7","判斷偏手型":"egg-8"
+};
+
+/* ─── QUESTIONS ─── */
+const QS=[
+  {n:1,t:"你去便利商店、藥妝店或超市時，最容易出現哪一種狀況？",
+   opts:[{l:"A",t:"本來只想買一樣，最後手上多了兩三樣"},{l:"B",t:"會一直想，反正這個遲早用得到"},{l:"C",t:"明明家裡可能還有，但當下懶得確認就先買"},{l:"D",t:"看到新的、小巧的、方便的，就很容易順手拿走"}],
+   sc:{A:{m:"方便漏手型",s:"情緒止痛型"},B:{m:"方便漏手型",s:"判斷偏手型"},C:{m:"失序重買型",s:"拖延加損型"},D:{m:"方便漏手型",s:"注意分流型"}}},
+  {n:2,t:"你生活裡最容易重複買到的是哪一類東西？",
+   opts:[{l:"A",t:"衛生紙、洗髮精、牙膏這種日用品"},{l:"B",t:"筆、便條紙、資料夾、收納小物這種文具雜物"},{l:"C",t:"零食、飲料、保健品這種吃的喝的"},{l:"D",t:"充電線、轉接頭、電池、生活小配件這種小工具"}],
+   sc:{A:{m:"失序重買型",s:"拖延加損型"},B:{m:"失序重買型",s:"注意分流型"},C:{m:"情緒止痛型",s:"方便漏手型"},D:{m:"失序重買型",s:"注意分流型"}}},
+  {n:3,t:"如果有人臨時開口，要你幫忙墊一下、順手買一下、先出一下，你最常見的反應是什麼？",
+   opts:[{l:"A",t:"先答應再說，之後通常拖很久，才會把代墊的錢算出來"},{l:"B",t:"當下會有點猶豫，但通常還是不好意思拒絕"},{l:"C",t:"會先記帳，可是最後都懶得去對帳"},{l:"D",t:"表面說沒關係，其實心裡會記很久"}],
+   sc:{A:{m:"人情失血型",s:"拖延加損型"},B:{m:"人情失血型",s:"判斷偏手型"},C:{m:"人情失血型",s:"拖延加損型"},D:{m:"人情失血型",s:"判斷偏手型"}}},
+  {n:4,t:"生活裡哪一種小地方，你最容易先想「算了，先這樣」？",
+   opts:[{l:"A",t:"帳單、繳費、扣款這種東西晚一點再看"},{l:"B",t:"買東西前先比價、先確認這件事"},{l:"C",t:"東西先亂放一下，晚點再整理"},{l:"D",t:"明明知道要記一下、收一下，但就先放著"}],
+   sc:{A:{m:"拖延加損型",s:"判斷偏手型"},B:{m:"優惠失守型",s:"判斷偏手型"},C:{m:"失序重買型",s:"注意分流型"},D:{m:"拖延加損型",s:"注意分流型"}}},
+  {n:5,t:"你看到「第二件五折／三件更便宜／多買多省／限時優惠」這種字，最常出現的反應是什麼？",
+   opts:[{l:"A",t:"會想說反正有省到，不拿白不拿"},{l:"B",t:"明明本來沒要買那麼多，但會開始猶豫"},{l:"C",t:"會先算一下，可是算一算還是會忍不住買下去"},{l:"D",t:"當下覺得很划算，回家才發現其實根本沒那麼需要"}],
+   sc:{A:{m:"優惠失守型",s:"方便漏手型"},B:{m:"優惠失守型",s:"判斷偏手型"},C:{m:"優惠失守型",s:"判斷偏手型"},D:{m:"優惠失守型",s:"失序重買型"}}},
+  {n:6,t:"你心情煩、悶、累、委屈的時候，最容易怎麼讓自己好過一點？",
+   opts:[{l:"A",t:"直接買點吃的喝的"},{l:"B",t:"滑購物網站，看看有沒有想買的東西"},{l:"C",t:"先叫外送，先花一點錢，方便比較重要"},{l:"D",t:"去逛一圈，買個小東西、喝杯飲料，覺得先讓自己舒服比較重要"}],
+   sc:{A:{m:"情緒止痛型",s:"方便漏手型"},B:{m:"情緒止痛型",s:"注意分流型"},C:{m:"情緒止痛型",s:"方便漏手型"},D:{m:"情緒止痛型",s:"判斷偏手型"}}},
+  {n:7,t:"如果今天真的要你先堵一個洞，你直覺最想先處理哪一種？",
+   opts:[{l:"A",t:"那些每天看起來沒多少、加起來卻很可怕的小支出"},{l:"B",t:"那些一直拖著沒處理、沒確認，又沒記清楚的小帳或零散開銷"},{l:"C",t:"那些因為不好意思、因為關係綁架，而一直莫名其妙散出去的錢"},{l:"D",t:"那些明明知道不對勁，可是就是一直讓自己漏財的壞習慣"}],
+   sc:{A:{m:"方便漏手型",s:"優惠失守型"},B:{m:"拖延加損型",s:"失序重買型"},C:{m:"人情失血型",s:"判斷偏手型"},D:{m:"判斷偏手型",s:"情緒止痛型"}}}
+];
+
+/* ─── RESULTS ─── */
+const RES={
+  "方便漏手型":{id:"E04-01",tagline:"潮金快漏",c1:"#D8B47B",c2:"#9B7A57",c3:"#F2E5CF",bb:"#D8B47B",bf:"#4A2808",
+    desc:"你不是亂花。你是只要事情想快一點、方便一點、舒服一點，手就很容易鬆。這種「先方便再說」，最容易養出長期漏口。你漏的不是一筆大錢，是很多次不想麻煩自己的小鬆手。",
+    talisman:"🪄 夾鏈小信封",why:"不是收納，是讓你把「今天本來就要買的東西」跟「臨時順手想拿的東西」硬分開。"},
+  "拖延加損型":{id:"E04-02",tagline:"延燒紙灰",c1:"#B7A392",c2:"#7E6B5C",c3:"#E5D9D0",bb:"#B7A392",bf:"#2A1A10",
+    desc:"你不是不知道要處理。你是會拖。帳單、核對、記帳、小事，拖著拖著本來只是小洞，最後越拖越大，還會連帶長出新的損失。",
+    talisman:"⏳ 巨大沙漏",why:"你要的不是療癒，是倒數。每次碰到小帳、小核對、小確認，沙漏一翻，三分鐘內完成，不要再拖。"},
+  "失序重買型":{id:"E04-03",tagline:"皺紙灰綠",c1:"#97A08E",c2:"#636B60",c3:"#DCE1D8",bb:"#97A08E",bf:"#182018",
+    desc:"你不是一次噴光一大筆錢。你是東一點、西一點，最後什麼都散掉。東西找不到、重複買、一直補。小錢散得到處都是，找不到，也留不下來。",
+    talisman:"🫙 透明玻璃糖果罐",why:"你真正要補的不是整理，而是把散得到處都是的東西硬集中成一個看得見的量。"},
+  "人情失血型":{id:"E04-04",tagline:"舊紅滲邊",c1:"#B7746B",c2:"#7A4E49",c3:"#E7C9C4",bb:"#B7746B",bf:"#FFFFFF",
+    desc:"你不是亂花錢。你是常常礙於關係、礙於不好意思，一直叫自己不要那麼斤斤計較。代墊的錢、幫忙出的錢、順手買的錢，就這樣一筆一筆散掉。",
+    talisman:"🗒️ 小白板",why:"每一次代墊、幫買、先出、先墊，全部直接寫上去。不是為了討錢難看，是讓你停止假裝那些錢沒有流出去。"},
+  "優惠失守型":{id:"E04-05",tagline:"亮膜假省金",c1:"#E2C56B",c2:"#A98546",c3:"#F6EBC8",bb:"#E2C56B",bf:"#4A2808",
+    desc:"你最容易在「好像有省到」的那個當下，手就鬆掉。買的不是需要，是錯過優惠的不甘心。你一邊在漏財，一邊還覺得自己很會幫荷包省錢。",
+    talisman:"🗓️ 日期印章",why:"每次因為優惠多買的東西，回家先蓋日期。七天後再看，你就知道自己是真的省到，還是只是把家裡堆成一堆假勝利。"},
+  "情緒止痛型":{id:"E04-06",tagline:"暖霧止痛粉棕",c1:"#C79A86",c2:"#8D6557",c3:"#EEDCCF",bb:"#C79A86",bf:"#FFFFFF",
+    desc:"其實常常什麼都不缺，可是只要負面情緒一上來，你就忍不住想用鈔票先讓自己舒服一下。你以為自己是在享受、在舒壓，其實只是又幫自己挖了一個更大的錢坑。",
+    talisman:"🫧 掌心舒壓球",why:"你要切斷的不是消費本身，而是那個「我現在不舒服，先花一點」的衝動。情緒一上來，先捏舒壓球一整首歌的時間。"},
+  "注意分流型":{id:"E04-07",tagline:"碎光灰藍",c1:"#AAB4BD",c2:"#6A727A",c3:"#E3E8EC",bb:"#AAB4BD",bf:"#18202A",
+    desc:"你不是真的沒錢，也不是真的窮。是錢都散的到處都是。做事常常做到一半就三心二意，原本想記帳，一瞬間又忘記。最後都是錢去幫你收拾殘局。",
+    talisman:"📋 螢光黃板夾",why:"所有收據、小票、零錢紀錄、要記的支出，全部只能先夾上去。這是你的「不准忽略」落點。"},
+  "判斷偏手型":{id:"E04-08",tagline:"偏軌暗銅",c1:"#9C775B",c2:"#5C4436",c3:"#DFCAB8",bb:"#9C775B",bf:"#FFFFFF",
+    desc:"你最痛的點從來不是不知道自己為什麼漏財，是明明知道，卻就是改不掉。你不是無知，是你知道，可是手就是會偏。",
+    talisman:"💍 指尖轉轉戒／矽膠握力圈",why:"你需要的是一個能把手硬停下來的東西。每次要花錢、要下單、要答應之前，先轉戒指五圈或握圈十下。先把手抓回來。"}
+};
+
+/* ─── STATE ─── */
+let curQ=0,ans={};
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function eggSVG(id,w,h){return`<svg width="${w}" height="${h}" viewBox="0 0 120 142"><use href="#${id}"/></svg>`}
+
+function startQuiz(){curQ=0;ans={};renderQ();show('s-quiz')}
+
+function renderQ(){
+  const q=QS[curQ],isLast=curQ===QS.length-1;
+  document.getElementById('pipLabel').textContent=`題目 ${curQ+1} / ${QS.length}`;
+  document.querySelectorAll('.pip').forEach((p,i)=>{p.className='pip';if(i<curQ)p.classList.add('done');else if(i===curQ)p.classList.add('cur')});
+  const bb=document.getElementById('btnBack');
+  bb.style.display=curQ>0?'block':'none';
+  const bn=document.getElementById('btnNext');
+  bn.textContent=isLast?'✦ 查看結果':'下一題 →';
+  bn.disabled=!ans[curQ];
+  const sel=ans[curQ];
+  document.getElementById('qCard').innerHTML=`
+    <div class="q-num">Q${q.n} · 七道直覺題</div>
+    <div class="q-text">${q.t}</div>
+    <div class="opts">${q.opts.map(o=>`
+      <button class="opt${sel===o.l?' sel':''}" onclick="pick('${o.l}')">
+        <span class="opt-ltr">${o.l}</span>
+        <span class="opt-txt">${o.t}</span>
+      </button>`).join('')}
+    </div>`;
+  document.querySelector('#s-quiz .scroll-body').scrollTop=0;
+}
+
+function pick(letter){
+  ans[curQ]=letter;
+  document.querySelectorAll('.opt').forEach(el=>{el.classList.remove('sel');if(el.querySelector('.opt-ltr').textContent===letter)el.classList.add('sel')});
+  document.getElementById('btnNext').disabled=false;
+}
+function nextQ(){if(!ans[curQ])return;if(curQ<QS.length-1){curQ++;renderQ();}else calcResult()}
+function prevQ(){if(curQ>0){curQ--;renderQ()}}
+
+function calcResult(){
+  show('s-loading');
+  const sc={};Object.keys(RES).forEach(t=>sc[t]=0);
+  QS.forEach((q,i)=>{const a=ans[i];if(!a)return;const s=q.sc[a];if(s){sc[s.m]=(sc[s.m]||0)+2;sc[s.s]=(sc[s.s]||0)+1}});
+  let sorted=Object.entries(sc).sort((a,b)=>b[1]-a[1]),top=sorted[0][0];
+  if(sorted.length>1&&sorted[0][1]===sorted[1][1]){const tb={};[3,4,6].forEach(i=>{const a=ans[i];if(!a)return;const s=QS[i].sc[a];if(s)tb[s.m]=(tb[s.m]||0)+1});const tbs=Object.entries(tb).sort((a,b)=>b[1]-a[1]);if(tbs.length)top=tbs[0][0]}
+  setTimeout(()=>{renderResult(top);show('s-result');document.querySelector('#s-result .scroll-body').scrollTop=0},1800);
+}
+
+function renderResult(type){
+  const r=RES[type];if(!r)return;
+  const eid=EGG[type];
+  const{c1,c2,c3}=r;
+  document.getElementById('resultContent').innerHTML=`
+    <div class="r-hero fu">
+      <div class="r-hero-bg" style="background:linear-gradient(160deg,${c3}90,${c1}45,transparent)"></div>
+      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1" viewBox="0 0 390 240" preserveAspectRatio="xMidYMid slice">
+        <ellipse cx="18" cy="44" rx="22" ry="14" fill="#F5E6DE" opacity=".3" transform="rotate(-25 18 44)"/>
+        <ellipse cx="372" cy="40" rx="20" ry="12" fill="${c1}" opacity=".25" transform="rotate(30 372 40)"/>
+        <circle cx="160" cy="25" r="3.5" fill="${c1}" opacity=".28"/>
+        <circle cx="234" cy="20" r="2.5" fill="#E8C8BC" opacity=".28"/>
+      </svg>
+      <div class="r-hero-in">
+        <div class="r-badge" style="background:${r.bb};color:${r.bf}">${r.id}</div>
+        <div class="r-egg">${eggSVG(eid,120,142)}</div>
+        <div class="r-orn">✦ ◇ ✦</div>
+        <div class="r-type">${type}</div>
+        <div class="r-tagline">${r.tagline}</div>
+      </div>
+    </div>
+    <div class="cstrip fu" style="animation-delay:.08s">
+      <div style="background:${c1}"></div><div style="background:${c2}"></div><div style="background:${c3}"></div>
+    </div>
+    <div class="r-body">
+      <div class="r-desc fu" style="animation-delay:.12s">${r.desc}</div>
+      <div class="sec-lbl fu" style="animation-delay:.18s">守財小物</div>
+      <div class="talisman-card fu" style="animation-delay:.22s">
+        <div class="talisman-name">${r.talisman}</div>
+        <div class="talisman-why">${r.why}</div>
+      </div>
+      <div class="sec-lbl fu" style="animation-delay:.28s">深度解析</div>
+      <div class="upgrade-card fu" style="animation-delay:.32s">
+        <div class="upgrade-title">💡 499 幫你抓到最核心的漏洞</div>
+        <div class="upgrade-txt">這份測驗只是先讓你看到財庫怎麼漏。499 才會真的幫你抓漏：找到那個最核心、最上游的漏洞點。那個洞不補，下面再怎麼補都還是會漏。</div>
+        <a class="btn-cta btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSdxPwVOHuB5FBAlRrLsPFXzVD_iQvgqsXb2svTVEJu2aAdVGw/viewform?usp=publish-editor" target="_blank" rel="noopener">✦ &nbsp;購買科學命理驗證報告</a>
+      </div>
+      <div class="sec-lbl fu" style="animation-delay:.38s">免費體驗</div>
+      <a class="btn-cta btn-outline fu" style="animation-delay:.42s" href="https://docs.google.com/forms/d/1fNzKy-3Y7wdn3-7grRQNflSHYJIYfl8v0J1IUPKSBXg/edit" target="_blank" rel="noopener">體驗心流測驗 →</a>
+      <button class="btn-retry fu" style="animation-delay:.48s" onclick="retry()">重新抽彩蛋</button>
+    </div>
+    <div class="safe-b"></div>`;
+}
+
+function retry(){curQ=0;ans={};renderQ();show('s-quiz');document.querySelector('#s-quiz .scroll-body').scrollTop=0}
+</script>
+</body>
+</html>
